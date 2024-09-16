@@ -3,25 +3,27 @@ import React from "react";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Feather from "@expo/vector-icons/Feather";
+import TabbarButton from "./tabbar-button";
+import { icons } from "@/assets/icons";
 
 const TabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
   const primaryColor = "#0891b2";
   const greyColor = "#737373";
 
-  const icons: { [key: string]: (props: any) => JSX.Element } = {
-    index: (props: any) => (
-      <AntDesign name="home" size={26} color={greyColor} {...props} />
-    ),
-    create: (props: any) => (
-      <AntDesign name="pluscircleo" size={26} color={greyColor} {...props} />
-    ),
-    explore: (props: any) => (
-      <Feather name="compass" size={26} color={greyColor} {...props} />
-    ),
-    profile: (props: any) => (
-      <AntDesign name="user" size={26} color={greyColor} {...props} />
-    ),
-  };
+  // const icons: { [key: string]: (props: any) => JSX.Element } = {
+  //   index: (props: any) => (
+  //     <AntDesign name="home" size={26} color={greyColor} {...props} />
+  //   ),
+  //   create: (props: any) => (
+  //     <AntDesign name="pluscircleo" size={26} color={greyColor} {...props} />
+  //   ),
+  //   explore: (props: any) => (
+  //     <Feather name="compass" size={26} color={greyColor} {...props} />
+  //   ),
+  //   profile: (props: any) => (
+  //     <AntDesign name="user" size={26} color={greyColor} {...props} />
+  //   ),
+  // };
 
   return (
     <View style={styles.tabBar}>
@@ -56,6 +58,19 @@ const TabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
             target: route.key,
           });
         };
+
+        return (
+          <TabbarButton
+            key={route.name}
+            style={styles.tabbarItem}
+            onPress={onPress}
+            onLongPress={onLongPress}
+            isFocused={isFocused}
+            routeName={route.name}
+            color={isFocused ? primaryColor : greyColor}
+            label={label as string}
+          />
+        );
 
         return (
           <TouchableOpacity
